@@ -8,8 +8,8 @@
       <%# プロトタイプの投稿者とログインしているユーザーが同じであれば以下を表示する %>
         <% if current_user == @prototype.user %>
         <div class="prototype__manage">
-          <%= link_to "編集する", edit_prototype_path, class: :prototype__btn %>
-          <%= link_to "削除する", prototype_path, method: :delete, class: :prototype__btn %>
+          <%= link_to "編集する", edit_prototype_path(@prototype), class: :prototype__btn %>
+          <%= link_to "削除する", prototype_path(@prototype), method: :delete, class: :prototype__btn %>
         </div>
         <% else %>
         <% end %>
@@ -34,7 +34,7 @@
       <div class="prototype__comments">
         <%# ログインしているユーザーには以下のコメント投稿フォームを表示する %>
         <% if user_signed_in? %>
-          <%= form_with(model: [@prototype, @comment], url: prototype_comment_index_path(@prototype.id), local: true) do |f|%>
+          <%= form_with model: @comment, url:prototype_comments_path(@prototype.id), local: true do |f|%>
             <div class="field">
               <%= f.label :comment, "コメント" %><br />
               <%= f.text_field :comment %>
