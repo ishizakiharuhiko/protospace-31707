@@ -48,4 +48,8 @@ class PrototypesController < ApplicationController
       params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
     end
 
+    def contributor_confirmation
+      redirect_to root_path unless current_user == @prototype.user
+    end
+
 end
